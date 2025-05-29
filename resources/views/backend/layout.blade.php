@@ -47,7 +47,8 @@
     </div>
     <!-- END MAIN CONTAINER -->
 
-   
+               @include('backend.includes.foot')
+
 
 </body>
 
