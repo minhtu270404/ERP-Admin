@@ -4,7 +4,7 @@
 
 <title>ERP Admin</title>
 
-<link rel="icon" type="image/x-icon" href="https://designreset.com/cork/html/src/assets/img/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="cork/html/src/assets/img/favicon.ico" />
 <link href="{{ asset('backend/layouts/collapsible-menu/css/light/loader.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('backend/layouts/collapsible-menu/css/dark/loader.css')}}" rel="stylesheet" type="text/css" />
 <script src="{{ asset('backend//layouts/collapsible-menu/loader.js')}}"></script>
@@ -24,3 +24,14 @@
 <link href="{{ asset('backend/src/assets/css/dark/components/list-group.css')}}" rel="stylesheet" type="text/css">
 <link href="{{ asset('backend/src/assets/css/dark/dashboard/dash_2.css')}}" rel="stylesheet" type="text/css" />
 <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/src/plugins/src/table/datatable/datatables.css')}}">
+
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/src/plugins/css/light/table/datatable/dt-global_style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/src/plugins/css/light/table/datatable/custom_dt_miscellaneous.css')}}">
+
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/src/plugins/css/dark/table/datatable/dt-global_style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/src/plugins/css/dark/table/datatable/custom_dt_miscellaneous.css')}}">
+
+<!-- END PAGE LEVEL STYLES -->

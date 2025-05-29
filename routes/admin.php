@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
+use App\Http\Controllers\Backend\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.index');
+Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
+Route::get('backend/category', [CategoryController::class, 'index'])->name('backend.category.index');
+Route::get('backend/product', [ProductController::class, 'index'])->name('backend.product.index');

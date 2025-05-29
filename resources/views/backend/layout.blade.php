@@ -21,7 +21,7 @@
         <div class="search-overlay"></div>
 
         <!--  BEGIN SIDEBAR  -->
-       @include('backend.includes.sidebar')
+        @include('backend.includes.sidebar')
         <!--  END SIDEBAR  -->
 
         <!--  BEGIN CONTENT AREA  -->
@@ -29,8 +29,17 @@
             <div class="layout-px-spacing">
 
                 <div class="middle-content container-xxl p-0">
-
-                    <div class="row layout-top-spacing">
+                    <!-- BREADCRUMB -->
+                    <div class="page-meta">
+                        <nav class="breadcrumb-style-one" aria-label="">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">@yield('module') | </a></li>
+                                <li class="breadcrumb-item active" aria-current="page">@yield('action')</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- /BREADCRUMB -->
+                    <div class="row layout-spacing">
                         @yield('admin-content')
 
                     </div>
@@ -47,7 +56,7 @@
     </div>
     <!-- END MAIN CONTAINER -->
 
-               @include('backend.includes.foot')
+    @include('backend.includes.foot')
 
 
 </body>
