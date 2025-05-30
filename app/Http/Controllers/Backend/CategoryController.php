@@ -19,7 +19,7 @@ class CategoryController extends Controller
         // query()
 
         $categories = Category::query()
-            ->where('status', '=', 'inactive')
+           // ->where('status', '=', 'inactive')
             ->orderBy('created_at')
             ->limit(3)
             ->get();

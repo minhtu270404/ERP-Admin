@@ -39,10 +39,10 @@
                         </nav>
                     </div>
                     <!-- /BREADCRUMB -->
-                    <div class="row layout-spacing">
+                    <div class="row">
                         @yield('admin-content')
-
                     </div>
+
 
                 </div>
 

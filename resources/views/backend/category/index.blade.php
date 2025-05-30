@@ -1,55 +1,55 @@
 @extends('backend.layout')
-@section('module', 'Category')
+@section('module', 'CategoryCategory')
 @section('action', 'Index')
 
 @section('admin-content')
+    <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-content widget-content-area">
 
-
-    <div class="row layout-spacing">
-        <div class="col-lg-12">
-            <div class="statbox widget box box-shadow">
-                <div class="widget-content widget-content-area">
-                    <div style="overflow-x: auto; width: 100%;">
-
-                        <table id="individual-col-search" class="table dt-table-hover">
-                            <thead>
+                <div style="overflow-x: auto;">
+                    <table id="html5-extension" class="table dt-table-hover" style="min-width: 1000px;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Category Name</th>
+                                <th>Status</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($categories as $cat)
                                 <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Category Name</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
-                                    <th>Status</th>
-                                    <th class="text-center dt-no-sorting">Action</th>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $cat->category_name }}</td>
+                                    <td>
+                                        <span class="badge badge-{{ $cat->status === 'active' ? 'success' : 'secondary' }}">
+                                            {{ ucfirst($cat->status) }}
+                                        </span>
+                                    </td>
+                                    
+                                    <td class="text-center">
+                                        <a href="#" title="Delete">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-trash-2 table-cancel">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4
+                                                    a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                </path>
+                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                            </svg>
+                                        </a>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($categories as $cat)
-                                    <tr>
-                                        <td class="text-center">{{ $cat->id }}</td>
-                                        <td>{{ $cat->category_name }}</td>
-                                        <td>{{ $cat->created_at }}</td>
-                                        <td>{{ $cat->updated_at }}</td>
-                                        <td>{{ $cat->status }}</td>
-                                        <td class="text-center"><a href="javascript:void(0);" class="bs-tooltip"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
-                                                data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-x-circle table-cancel">
-                                                    <circle cx="12" cy="12" r="10"></circle>
-                                                    <line x1="15" y1="9" x2="9" y2="15"></line>
-                                                    <line x1="9" y1="9" x2="15" y2="15"></line>
-                                                </svg></a></td>
-
-                                    </tr>
-                                @endforeach
-                            </tbody>
-
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
+
             </div>
         </div>
     </div>
-
 @endsection

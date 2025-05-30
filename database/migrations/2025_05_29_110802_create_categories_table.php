@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->string('category_name');
             $table->enum('status',['active','inactive'])->default('inactive');
-
             $table->timestamps();
         });
     }
