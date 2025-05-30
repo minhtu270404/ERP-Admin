@@ -29,17 +29,34 @@
             <div class="layout-px-spacing">
 
                 <div class="middle-content container-xxl p-0">
-                    <!-- BREADCRUMB -->
-                    <div class="page-meta">
-                        <nav class="breadcrumb-style-one" aria-label="">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">@yield('module') | </a></li>
-                                <li class="breadcrumb-item active" aria-current="page">@yield('action')</li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <!-- /BREADCRUMB -->
+
                     <div class="row">
+                        <!-- BREADCRUMB -->
+
+                        <div class="page-meta">
+                            <nav class="breadcrumb-style-one" aria-label="">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">@yield('module') | </a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">@yield('action')</li>
+                                </ol>
+                            </nav>
+                        </div>
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                               {{session('success')}}
+                            </div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <!-- /BREADCRUMB -->
                         @yield('admin-content')
                     </div>
 

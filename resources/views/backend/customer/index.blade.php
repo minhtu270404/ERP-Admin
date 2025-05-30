@@ -3,6 +3,9 @@
 @section('action', 'Index')
 
 @section('admin-content')
+  <div class="col-12 d-flex justify-content-end">
+        <a href="{{ route('backend.customer.create') }}" class="btn btn-primary" >Add Customer</a>
+    </div>
     <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
         <div class="statbox widget box box-shadow">
             <div class="widget-content widget-content-area">

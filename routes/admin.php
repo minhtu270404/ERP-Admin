@@ -17,7 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.index');
-Route::get('backend/category', [CategoryController::class, 'index'])->name('backend.category.index');
-Route::get('backend/product', [ProductController::class, 'index'])->name('backend.product.index');
-route::get('backend/customer',[CustomerController::class,'index'])->name('backend.customer.index');
+Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
+Route::get('backend/category', [CategoryController::class, 'index'])->name('backend.category');
+Route::get('backend/product', [ProductController::class, 'index'])->name('backend.product');
+Route::get('backend/customer', [CustomerController::class, 'index'])->name('backend.customer');
+Route::get('backend/category/create', [CategoryController::class, 'create'])->name('backend.category.create');
+Route::get('backend/product/create', [ProductController::class, 'create'])->name('backend.product.create');
+Route::get('backend/customer/create', [CustomerController::class, 'create'])->name('backend.customer.create');
+
+Route::post('backend/category/store', [CategoryController::class, 'store'])->name('backend.category.store');
+Route::post('backend/product/store', [ProductController::class, 'store'])->name('backend.product.store');
+

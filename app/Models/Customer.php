@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
+    protected $table = 'customers';
 
-    public function category() {
-        return $this->belongsTo(Category::class);
-    }
+    protected $fillable = ['customer_name', 'customer_email', 'customer_phone', 'customer_address', 'customer_date', 'customer_image', 'gender', 'status'];
+
 }

@@ -45,7 +45,7 @@
                 </a>
                 <ul class="collapse submenu list-unstyled show" id="dashboard" data-bs-parent="#accordionExample">
                     <li>
-                        <a href="{{ route('backend.dashboard.index') }}"> Analytics </a>
+                        <a href="{{ route('backend.dashboard') }}"> Analytics </a>
                     </li>
 
                 </ul>
@@ -60,7 +60,7 @@
             </li>
 
             <li class="menu">
-                <a href="{{ route('backend.category.index') }}" aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ route('backend.category') }}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -78,7 +78,7 @@
                 </a>
             </li>
             <li class="menu">
-                <a href="{{ route('backend.product.index') }}" aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ route('backend.product') }}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -105,7 +105,7 @@
             </li>
 
             <li class="menu">
-                <a href="{{ route('backend.customer.index') }}" aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ route('backend.customer') }}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
