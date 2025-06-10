@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Log;
 class ProductController extends Controller
 {
     public function index()
@@ -21,6 +23,7 @@ class ProductController extends Controller
     {
         $categories = Category::query()
             ->where('status', '=', 'active')
+            ->orderBy('created_at')
             ->get();
         return view('backend.product.create', compact('categories'));
     }
@@ -36,18 +39,63 @@ class ProductController extends Controller
         // ));
 
         // C1: store in the database
-        $products = new Product();
-        $products->product_name = $request->product_name;
-        $products->product_image = $request->product_image;
-        $products->product_price = $request->product_price;
-        $products->product_description = $request->product_description;
-        $products->category_id = $request->category_id;
-        $products->status = $request->status;
-        $products->save();
+
+        DB::beginTransaction();
+
+        try {
+            $products = new Product();
+            $products->product_name = $request->product_name;
+            $products->product_image = $request->product_image;
+            $products->product_price = $request->product_price;
+            $products->product_description = $request->product_description;
+            $products->category_id = $request->category_id;
+            $products->status = $request->status;
+            $products->save();
+            DB::commit();
+            return redirect()->route('backend.product')->with('success', 'Create Product Successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Failed to Create Products : ' . $e->getMessage());
+            return redirect()->route('backend.product.create')->with('error', 'Failed to Create Products');
+        }
 
         //C2
         // Category::create($request->validated());
 
-        return redirect()->route('backend.product')->with('success', 'Create Product Successfully');
     }
+    public function edit($id)
+    {
+        $categories = Category::query()
+            ->where('status', '=', 'active')
+            ->get();
+        $product = Product::findOrFail($id);
+        return view('backend.product.edit', compact('categories', 'product'));
+    }
+  public function update(Request $request, $id)
+{
+    DB::beginTransaction();
+
+    try {
+        $product = Product::findOrFail($id);
+        $product->update([
+                'product_name' => $request->product_name,
+                'product_image' => $request->product_image,
+                'product_price' => $request->product_price,
+                'product_description' => $request->product_description,
+                'category_id' => $request->category_id,
+                'status' => $request->status,
+                
+
+            ]);
+
+        DB::commit();
+        return redirect()->route('backend.product')->with('success', 'Product Updated Successfully');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        Log::error('Failed to Update Product: ' . $e->getMessage());
+        return redirect()->route('backend.product')->with('error', 'Failed to Update Product');
+    }
+}
+
 }

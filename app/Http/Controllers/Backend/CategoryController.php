@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use DB;
 use Illuminate\Http\Request;
+use Log;
 
 class CategoryController extends Controller
 {
@@ -55,14 +57,56 @@ class CategoryController extends Controller
         // ));
 
         // C1: store in the database
-        $categories = new Category();
-        $categories->category_name = $request->category_name;
-        $categories->status = $request->status;
-        $categories->save();
+
+        DB::beginTransaction();
+
+        try {
+            $categories = new Category();
+            $categories->category_name = $request->category_name;
+            $categories->status = $request->status;
+            $categories->save();
+
+
+            DB::commit();
+            return redirect()->route('backend.category')->with('success', 'Create Category Successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Failed to Create Category : ' . $e->getMessage());
+            return redirect()->route('backend.category.create')->with('error', 'Failed to Create Category');
+        }
+    }
+    public function edit($id)
+    {
+        $categories = Category::findOrFail($id);
+        return view('backend.category.edit', compact('categories'));
+    }
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $Categories = Category::findOrFail($id);
+            $Categories->update([
+                'category_name' => $request->category_name,
+                'status' => $request->status,
+
+            ]);
+
+            DB::commit();
+            return redirect()->route('backend.category')->with('success', 'Edit Category Successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Failed to Edit Category : ' . $e->getMessage());
+            return redirect()->route('backend.category')->with('success', 'Edit Category Successfully');
+        }
+
+
+
 
         //C2
         // Category::create($request->validated());
-        
-        return redirect()->route('backend.category')->with('success', 'Create Category Successfully');
+
     }
 }

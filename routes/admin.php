@@ -28,3 +28,8 @@ Route::get('backend/customer/create', [CustomerController::class, 'create'])->na
 Route::post('backend/category/store', [CategoryController::class, 'store'])->name('backend.category.store');
 Route::post('backend/product/store', [ProductController::class, 'store'])->name('backend.product.store');
 
+Route::get('backend/product/edit/{id}', [ProductController::class, 'edit'])->name('backend.product.edit');
+Route::post('backend/product/update/{id}', [ProductController::class, 'update'])->name('backend.product.update');
+
+Route::get('backend/category/edit/{id}', [CategoryController::class, 'edit'])->name('backend.category.edit');
+Route::post('backend/category/update/{id}', [CategoryController::class, 'update'])->name('backend.category.update');
