@@ -33,3 +33,6 @@ Route::post('backend/product/update/{id}', [ProductController::class, 'update'])
 
 Route::get('backend/category/edit/{id}', [CategoryController::class, 'edit'])->name('backend.category.edit');
 Route::post('backend/category/update/{id}', [CategoryController::class, 'update'])->name('backend.category.update');
+
+Route::get('backend/product/destroy/{id}', [ProductController::class, 'destroy'])->name('backend.product.destroy');
+Route::get('backend/category/destroy/{id}', [CategoryController::class, 'destroy'])->name('backend.category.destroy');

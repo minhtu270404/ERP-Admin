@@ -6,6 +6,7 @@
     <div class="col-12 d-flex justify-content-end">
         <a href="{{ route('backend.product.create') }}" class="btn btn-primary">Add Product</a>
     </div>
+    
     <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
         <div class="statbox widget box box-shadow">
             <div class="widget-content widget-content-area">
@@ -31,15 +32,15 @@
                                     <td>
                                         <div class="d-flex">
                                             <div class="usr-img-frame mr-2 rounded-circle">
-                                                @if ($pro->product_image)
-                                                    <img alt="avatar" class="img-fluid rounded-circle" src="" width="40">
+                                                <!-- @if ($pro->product_image)
+                                                    <img alt="avatar" class="img-fluid rounded-circle" src="{{ asset('storage/' . $pro->product_image) }}" width="40">
                                                 @else
-                                                    <img alt="avatar" class="img-fluid rounded-circle" src="" width="40">
-                                                @endif
+                                                    <img alt="avatar" class="img-fluid rounded-circle" src="{{ asset('images/default_product.png') }}" width="40">
+                                                @endif -->
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{{ $pro->product_price }}</td>
+                                    <td>{{ number_format($pro->product_price, 2) }}</td>
                                     <td>{{ ucfirst($pro->cat_name) }}</td>
                                     <td>
                                         <span class="badge badge-{{ $pro->status === 'active' ? 'success' : 'secondary' }}">
@@ -47,27 +48,21 @@
                                         </span>
                                     </td>
                                     <td class="text-center">
-                                        <a href="#" title="Delete">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" class="feather feather-trash-2 table-cancel">
+                                      
+                                        <a href="{{ route('backend.product.destroy', $pro->id) }}" title="Delete" onclick="return confirm('Are you sure you want to delete this product?');">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 table-cancel">
                                                 <polyline points="3 6 5 6 21 6"></polyline>
-                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4
-                                                                            a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                </path>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                                                 <line x1="10" y1="11" x2="10" y2="17"></line>
                                                 <line x1="14" y1="11" x2="14" y2="17"></line>
                                             </svg>
                                         </a>
-                                        <a href="{{ route('backend.product.edit',$pro->id) }}" aria-expanded="false" class="dropdown-toggle">
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" class="feather feather-edit">
+                                    
+                                        <a href="{{ route('backend.product.edit',$pro->id) }}" aria-expanded="false" class="dropdown-toggle" title="Edit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
                                                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                             </svg>
-
                                         </a>
                                     </td>
                                 </tr>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\Product;
 use DB;
 use Illuminate\Http\Request;
 use Log;
@@ -101,12 +102,21 @@ class CategoryController extends Controller
             Log::error('Failed to Edit Category : ' . $e->getMessage());
             return redirect()->route('backend.category')->with('success', 'Edit Category Successfully');
         }
+    }
+   public function destroy($id)
+    {   
+        $checkExistProd = Product::where('category_id',$id)->exists();
+        if($checkExistProd){
+                return redirect()->route('backend.category')->with('error', 'Category Can Not Deleted');
+        }
+        try {
+          Category::findOrFail($id)->delete();
+                return redirect()->route('backend.category')->with('success', 'Category Deleted Successfully');
 
-
-
-
-        //C2
-        // Category::create($request->validated());
-
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Failed to Destroy category: ' . $e->getMessage());
+            return redirect()->route('backend.category')->with('error', 'Failed to Destroy Category');
+        }
     }
 }

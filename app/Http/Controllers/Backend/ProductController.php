@@ -72,30 +72,42 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         return view('backend.product.edit', compact('categories', 'product'));
     }
-  public function update(Request $request, $id)
-{
-    DB::beginTransaction();
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
 
-    try {
-        $product = Product::findOrFail($id);
-        $product->update([
+        try {
+            $product = Product::findOrFail($id);
+            $product->update([
                 'product_name' => $request->product_name,
                 'product_image' => $request->product_image,
                 'product_price' => $request->product_price,
                 'product_description' => $request->product_description,
                 'category_id' => $request->category_id,
                 'status' => $request->status,
-                
+
 
             ]);
 
-        DB::commit();
-        return redirect()->route('backend.product')->with('success', 'Product Updated Successfully');
-    } catch (\Exception $e) {
-        DB::rollBack();
-        Log::error('Failed to Update Product: ' . $e->getMessage());
-        return redirect()->route('backend.product')->with('error', 'Failed to Update Product');
+            DB::commit();
+            return redirect()->route('backend.product')->with('success', 'Product Updated Successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Failed to Update Product: ' . $e->getMessage());
+            return redirect()->route('backend.product')->with('error', 'Failed to Update Product');
+        }
     }
-}
+    public function destroy($id)
+    {
+        try {
+          Product::findOrFail($id)->delete();
+                return redirect()->route('backend.product')->with('success', 'Product Deleted Successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Failed to Destroy Product: ' . $e->getMessage());
+            return redirect()->route('backend.product')->with('error', 'Failed to Destroy Product');
+        }
+    }
 
 }
