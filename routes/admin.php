@@ -17,22 +17,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
-Route::get('backend/category', [CategoryController::class, 'index'])->name('backend.category');
-Route::get('backend/product', [ProductController::class, 'index'])->name('backend.product');
-Route::get('backend/customer', [CustomerController::class, 'index'])->name('backend.customer');
-Route::get('backend/category/create', [CategoryController::class, 'create'])->name('backend.category.create');
-Route::get('backend/product/create', [ProductController::class, 'create'])->name('backend.product.create');
-Route::get('backend/customer/create', [CustomerController::class, 'create'])->name('backend.customer.create');
+Route::prefix('backend')->name('backend.')->group(function () {
 
-Route::post('backend/category/store', [CategoryController::class, 'store'])->name('backend.category.store');
-Route::post('backend/product/store', [ProductController::class, 'store'])->name('backend.product.store');
 
-Route::get('backend/product/edit/{id}', [ProductController::class, 'edit'])->name('backend.product.edit');
-Route::post('backend/product/update/{id}', [ProductController::class, 'update'])->name('backend.product.update');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('backend/category/edit/{id}', [CategoryController::class, 'edit'])->name('backend.category.edit');
-Route::post('backend/category/update/{id}', [CategoryController::class, 'update'])->name('backend.category.update');
+    Route::prefix('/product')->controller(ProductController::class)->name('product.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
+    });
+    Route::prefix('/category')->controller(CategoryController::class)->name('category.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
+    });
+    Route::prefix('/customer')->controller(CustomerController::class)->name('customer.')->group(function () {
 
-Route::get('backend/product/destroy/{id}', [ProductController::class, 'destroy'])->name('backend.product.destroy');
-Route::get('backend/category/destroy/{id}', [CategoryController::class, 'destroy'])->name('backend.category.destroy');
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+    });
+});
