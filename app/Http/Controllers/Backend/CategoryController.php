@@ -95,12 +95,12 @@ class CategoryController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('backend.category')->with('success', 'Edit Category Successfully');
+            return redirect()->route('backend.category.index')->with('success', 'Edit Category Successfully');
 
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Failed to Edit Category : ' . $e->getMessage());
-            return redirect()->route('backend.category')->with('success', 'Edit Category Successfully');
+            return redirect()->route('backend.category.index')->with('success', 'Edit Category Successfully');
         }
     }
     public function destroy($id)
@@ -108,17 +108,17 @@ class CategoryController extends Controller
         DB::beginTransaction();
         $checkExistProd = Product::where('category_id', $id)->exists();
         if ($checkExistProd) {
-            return redirect()->route('backend.category')->with('error', 'Category Can Not Deleted');
+            return redirect()->route('backend.category.index')->with('error', 'Category Can Not Deleted');
         }
         try {
             Category::findOrFail($id)->delete();
             DB::commit();
-            return redirect()->route('backend.category')->with('success', 'Category Deleted Successfully');
+            return redirect()->route('backend.category.index')->with('success', 'Category Deleted Successfully');
 
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Failed to Destroy category: ' . $e->getMessage());
-            return redirect()->route('backend.category')->with('error', 'Failed to Destroy Category');
+            return redirect()->route('backend.category.index')->with('error', 'Failed to Destroy Category');
         }
     }
 }

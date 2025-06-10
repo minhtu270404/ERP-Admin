@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
+use App\Traits\ImageUploadTrait;
 use DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Log;
+
 class ProductController extends Controller
 {
+    use ImageUploadTrait;
     public function index()
     {
         $products = Product::select('products.*', 'categories.category_name as cat_name')
@@ -30,29 +33,21 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
 
-        //Eloquent ORM
-
-        // validate the data
-        // $this->validate($request, array(
-        //     'category_name' => 'required|max:255',
-        //     'status' => 'required'
-        // ));
-
-        // C1: store in the database
-
         DB::beginTransaction();
 
+        $imageProduct = $this->UploadImage($request,'product_image','uploads');
+       
         try {
             $products = new Product();
             $products->product_name = $request->product_name;
-            $products->product_image = $request->product_image;
+            $products->product_image = $imageProduct;
             $products->product_price = $request->product_price;
             $products->product_description = $request->product_description;
             $products->category_id = $request->category_id;
             $products->status = $request->status;
             $products->save();
             DB::commit();
-            return redirect()->route('backend.product')->with('success', 'Create Product Successfully');
+            return redirect()->route('backend.product.index')->with('success', 'Create Product Successfully');
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -90,23 +85,23 @@ class ProductController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('backend.product')->with('success', 'Product Updated Successfully');
+            return redirect()->route('backend.product.index')->with('success', 'Product Updated Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Failed to Update Product: ' . $e->getMessage());
-            return redirect()->route('backend.product')->with('error', 'Failed to Update Product');
+            return redirect()->route('backend.product.index')->with('error', 'Failed to Update Product');
         }
     }
     public function destroy($id)
     {
         try {
-          Product::findOrFail($id)->delete();
-                return redirect()->route('backend.product')->with('success', 'Product Deleted Successfully');
+            Product::findOrFail($id)->delete();
+            return redirect()->route('backend.product.index')->with('success', 'Product Deleted Successfully');
 
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Failed to Destroy Product: ' . $e->getMessage());
-            return redirect()->route('backend.product')->with('error', 'Failed to Destroy Product');
+            return redirect()->route('backend.product.index')->with('error', 'Failed to Destroy Product');
         }
     }
 

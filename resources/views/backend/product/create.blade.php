@@ -9,7 +9,7 @@
         <div class="statbox widget box box-shadow">
 
             <div class="widget-content widget-content-area">
-                <form action="{{ route('backend.product.store') }}" method="post" class="row p-2 g-3 needs-validation"
+                <form action="{{ route('backend.product.store') }}" method="post" class="row p-2 g-3 needs-validation" enctype="multipart/form-data"
                     novalidate>
                     @csrf
                     <div class="col-md-4">

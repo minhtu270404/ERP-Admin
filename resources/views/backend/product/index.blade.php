@@ -31,12 +31,12 @@
                                     <td>{{ $pro->product_name }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <div class="usr-img-frame mr-2 rounded-circle">
-                                                <!-- @if ($pro->product_image)
-                                                    <img alt="avatar" class="img-fluid rounded-circle" src="{{ asset('storage/' . $pro->product_image) }}" width="40">
+                                            <div class="">
+                                                 @if ($pro->product_image)
+                                                    <img alt="avatar" class="img-fluid " src="{{ asset($pro->product_image) }}" width="70">
                                                 @else
-                                                    <img alt="avatar" class="img-fluid rounded-circle" src="{{ asset('images/default_product.png') }}" width="40">
-                                                @endif -->
+                                                    <img alt="avatar" class="img-fluid " src="{{ asset('uploads/default-image.jpg') }}" width="70">
+                                                @endif 
                                             </div>
                                         </div>
                                     </td>

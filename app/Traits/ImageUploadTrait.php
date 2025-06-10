@@ -13,7 +13,7 @@ trait ImageUploadTrait
         if ($request->hasFile($inputName)) {
 
             $image = $request->{$inputName};//
-            $ext = $image->getClienOriginalExtenstion();        // de lay ten anh
+            $ext = $image->getClientOriginalExtension();        // de lay ten anh
             $imageName = 'image_' . uniqid() . '.' . $ext;
             $image->move(public_path($path), $imageName);
             return $path . '/' . $imageName;
@@ -30,7 +30,7 @@ trait ImageUploadTrait
             $images = $request->{$inputName};
 
             foreach ($images as $image) {
-                $ext = $image->getClienOriginalExtenstion();        // de lay ten anh
+                $ext = $image->getClientOriginalExtension();        // de lay ten anh
                 $imageName = 'image_' . uniqid() . '.' . $ext;
                 $image->move(public_path($path), $imageName);
                 $imagePaths[] = $path . '/' . $imageName;
