@@ -103,15 +103,17 @@ class CategoryController extends Controller
             return redirect()->route('backend.category')->with('success', 'Edit Category Successfully');
         }
     }
-   public function destroy($id)
-    {   
-        $checkExistProd = Product::where('category_id',$id)->exists();
-        if($checkExistProd){
-                return redirect()->route('backend.category')->with('error', 'Category Can Not Deleted');
+    public function destroy($id)
+    {
+        DB::beginTransaction();
+        $checkExistProd = Product::where('category_id', $id)->exists();
+        if ($checkExistProd) {
+            return redirect()->route('backend.category')->with('error', 'Category Can Not Deleted');
         }
         try {
-          Category::findOrFail($id)->delete();
-                return redirect()->route('backend.category')->with('success', 'Category Deleted Successfully');
+            Category::findOrFail($id)->delete();
+            DB::commit();
+            return redirect()->route('backend.category')->with('success', 'Category Deleted Successfully');
 
         } catch (\Exception $e) {
             DB::rollBack();
