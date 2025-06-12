@@ -9,11 +9,11 @@
         <div class="statbox widget box box-shadow">
 
             <div class="widget-content widget-content-area">
-                <form class="row p-2 g-3 needs-validation" novalidate>
+                <form action="{{ route('backend.customer.store') }}" method="post" class="row p-2 g-3 needs-validation" novalidate enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-4">
                         <label for="" class="form-label">Customer Name</label>
-                        <input type="text" class="form-control" id="" value="" required>
+                        <input type="text" class="form-control" id="" value="" required name ="customer_name">
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -22,7 +22,7 @@
                         <label for="" class="form-label">Customer Email</label>
                         <div class="input-group has-validation">
 
-                            <input type="text" class="form-control" id="" aria-describedby="" required>
+                            <input type="text" class="form-control" id="" aria-describedby="" required name ="customer_email">
                             <div class="invalid-feedback">
 
                             </div>
@@ -30,30 +30,31 @@
                     </div>
                     <div class="col-md-3">
                         <label for="" class="form-label">Customer Phone</label>
-                        <input type="text" class="form-control" id="" required>
+                        <input type="text" class="form-control" id="" required name ="customer_phone">
                         <div class="invalid-feedback">
 
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="" class="form-label">Customer Address</label>
-                        <input type="text" class="form-control" id="" value="" required>
+                        <input type="text" class="form-control" id="" value="" required name ="customer_address">
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="" class="form-label">Date</label>
-                        <input type="date" class="form-control" id="" value="" required>
+                        <input type="date" class="form-control" id="" value="" required name="customer_date">
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     <div class="col-md-3">
                         <label for="" class="form-label">Gender</label>
-                        <select class="form-select" id="" required>
-                            <option selected disabled value="">Choose...</option>
-                            <option>...</option>
+                        <select class="form-select" id="" required name="gender">
+                           <option selected disabled value="">Choose...</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
                         </select>
                         <div class="invalid-feedback">
 
@@ -61,16 +62,17 @@
                     </div>
                     <div class="col-md-4">
                         <label for="" class="form-label">Customer Image</label>
-                        <input type="file" class="form-control" id="" value="" required>
+                        <input type="file" class="form-control" id="" value="" required name="customer_image">
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     <div class="col-md-3">
                         <label for="" class="form-label">Status</label>
-                        <select class="form-select" id="" required>
+                        <select class="form-select" id="" required name="status">
                             <option selected disabled value="">Choose...</option>
-                            <option>...</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">InActive</option>
                         </select>
                         <div class="invalid-feedback">
 

@@ -29,7 +29,7 @@ class CustomerRequest extends FormRequest
             'customer_phone' => 'required|string|max:20',
             'customer_address' => 'required|string',
             'customer_date' => 'required|date',
-            'customer_image' => 'nullable|string', // hoặc 'image' nếu upload file
+            'customer_image' => 'nullable', // hoặc 'image' nếu upload file
             'gender' => 'required|in:male,female',
             'status' => 'required|in:active,inactive',
         ];

@@ -46,15 +46,15 @@
                                         <div class="d-flex">
                                             <div class="usr-img-frame mr-2 rounded-circle">
                                                 @if ($customer->customer_image)
-                                                    <img alt="avatar" class="img-fluid rounded-circle" src="" width="40">
+                                                    <img alt="avatar" class="img-fluid" src="{{ asset($customer->customer_image) }}" width="40">
                                                 @else
-                                                    <img alt="avatar" class="img-fluid rounded-circle" src="" width="40">
+                                                    <img alt="avatar" class="img-fluid" src="{{ asset('uploads/default-image.jpg') }}" width="40">
                                                 @endif
                                             </div>
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <a href="#" title="Delete">
+                                        <a href="{{ route('backend.customer.destroy', $customer->id) }}" title="Delete" onclick="return confirm('Are you sure you want to delete this product?');">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                 stroke-linejoin="round" class="feather feather-trash-2 table-cancel">
@@ -66,7 +66,7 @@
                                                 <line x1="14" y1="11" x2="14" y2="17"></line>
                                             </svg>
                                         </a>
-                                        <a href="" aria-expanded="false" class="dropdown-toggle">
+                                        <a href="{{ route('backend.customer.edit',$customer->id) }}" aria-expanded="false" class="dropdown-toggle">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
