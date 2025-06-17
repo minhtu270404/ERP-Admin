@@ -1,4 +1,6 @@
 <?php
+use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\Backend\Dashboard\DashboardController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -13,3 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('register',[AuthController::class,'showRegisterForm'])->name('register');
+Route::get('user/login',[AuthController::class,'showLoginForm'])->name('showlogin');
+
+Route::post('/auth/register', [AuthController::class, 'register'])->name('handleregister');
+Route::post('login',[AuthController::class,'login'])->name('login.process');
+Route::post('logout',[AuthController::class,'logout'])->name('logout');
+
+Route::get('user/dashboard', [AuthController::class, 'show'])
+    ->name('user.dashboard')
+    ->middleware('check_role:client');

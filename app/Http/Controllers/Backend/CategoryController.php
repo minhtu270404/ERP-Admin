@@ -69,7 +69,7 @@ class CategoryController extends Controller
 
 
             DB::commit();
-            return redirect()->route('backend.category')->with('success', 'Create Category Successfully');
+            return redirect()->route('backend.category.index')->with('success', 'Create Category Successfully');
 
         } catch (\Exception $e) {
             DB::rollBack();

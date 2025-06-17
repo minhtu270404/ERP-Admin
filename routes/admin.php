@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Backend\BlogCategoryController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
@@ -17,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('backend')->name('backend.')->group(function () {
+Route::middleware('check_role:admin')->prefix('backend')->name('backend.')->group(function () {
 
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -39,6 +41,26 @@ Route::prefix('backend')->name('backend.')->group(function () {
         Route::get('/destroy/{id}', 'destroy')->name('destroy');
     });
     Route::prefix('/customer')->controller(CustomerController::class)->name('customer.')->group(function () {
+
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('/blog')->controller(BlogController::class)->name('blog.')->group(function () {
+
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
+    });
+  // Route::resource('photos', 'PhotoController');
+  Route::prefix('/blog_category')->controller(BlogCategoryController::class)->name('blog_category.')->group(function () {
 
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');

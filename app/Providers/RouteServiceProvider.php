@@ -40,4 +40,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/admin.php'));
         });
     }
+    public const DASHBOARD_CLIENT = '/user/dashboard';
+    public const DASHBOARD_ADMIN = '/backend/dashboard';
 }
